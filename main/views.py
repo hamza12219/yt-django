@@ -104,5 +104,3 @@ def home(request):
     def setting(request):
    
         return render(request, 'setting.html')
-"""
-      
