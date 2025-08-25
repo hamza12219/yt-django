@@ -87,17 +87,19 @@ DATABASES = {
     }
 }
 """
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'syctWPcNEGnNlVrmxPTgTcBNTtLbNhGu',
-        'HOST': 'mysql.railway.internal',
-        'PORT': '3306',
+        'NAME': os.getenv('MYSQL_DATABASE'),
+        'USER': os.getenv('MYSQL_USER', 'root'),  # or MYSQLUSER if that's your env var
+        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD'),
+        'HOST': os.getenv('MYSQL_HOST', 'mysql.railway.internal'),
+        'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
 }
+CSRF_TRUSTED_ORIGINS = [
+    "https://upbeat-curiosity-production.up.railway.app",
+]
 
 
 # Password validation
