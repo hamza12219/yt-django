@@ -103,9 +103,9 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE'),
+        'NAME': os.getenv('MYSQL_DATABASE','railway'),
         'USER': os.getenv('MYSQL_USER', 'root'),  # or MYSQLUSER if that's your env var
-        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD'),
+        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD','syctWPcNEGnNlVrmxPTgTcBNTtLbNhGu'),
         'HOST': os.getenv('MYSQL_HOST', 'mysql.railway.internal'),
         'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
