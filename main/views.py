@@ -77,14 +77,19 @@ def extract_video_id(url):
 @login_required(login_url='login')
 def home(request):
     # your existing home logic (transcript viewer etc) goes here
-proxies = {
-    'http': 'http://103.216.82.38:6667',
-    'https': 'http://103.216.82.38:6667',
-}
+    PROXIES = [
+          'http://103.216.82.38:6667',
+          'http://45.70.153.55:8080',
+          'http://157.245.84.235:3128',
+          'http://165.22.254.56:8080',
+          'http://51.158.68.68:8811',
+          # add more if you want
+    ]
 
 
     context = {'transcript': None, 'error': None}
 
+    """
     if request.method == 'POST':
         url = request.POST.get('youtube_url', '')
         video_id = extract_video_id(url)
@@ -108,4 +113,24 @@ proxies = {
     def setting(request):
    
         return render(request, 'setting.html')
+"""
+          if request.method == 'POST':
+        url = request.POST.get('youtube_url', '')
+        video_id = extract_video_id(url)
 
+        if not video_id:
+            context['error'] = "Invalid YouTube URL."
+        else:
+            last_error = None
+            for proxy in PROXIES:
+                try:
+                    transcript = YouTubeTranscriptApi(proxies={'http': proxy, 'https': proxy}).fetch(video_id)
+                    formatted = [f"[{line.start:.2f}s] {line.text}" for line in transcript]
+                    context['transcript'] = "\n".join(formatted)
+                    break  # Success, break out of proxy loop
+                except Exception as e:
+                    last_error = e
+            else:
+                context['error'] = f"All proxies failed. Last error: {str(last_error)}"
+
+    return render(request, 'home.html', context)
