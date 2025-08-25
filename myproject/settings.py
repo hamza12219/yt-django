@@ -112,7 +112,7 @@ DATABASES = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://upbeat-curiosity-production.up.railway.app",
+    'https://upbeat-curiosity-production.up.railway.app',
 ]
 
 
