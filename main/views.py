@@ -77,6 +77,11 @@ def extract_video_id(url):
 @login_required(login_url='login')
 def home(request):
     # your existing home logic (transcript viewer etc) goes here
+proxies = {
+    'http': 'http://103.216.82.38:6667',
+    'https': 'http://103.216.82.38:6667',
+}
+
 
     context = {'transcript': None, 'error': None}
 
@@ -88,7 +93,9 @@ def home(request):
             context['error'] = "Invalid YouTube URL."
         else:
             try:
-                transcript = YouTubeTranscriptApi().fetch(video_id)
+                #transcript = YouTubeTranscriptApi().fetch(video_id)
+               transcript = YouTubeTranscriptApi(proxies=proxies).fetch(video_id)
+
                 formatted = [f"[{line.start:.2f}s] {line.text}" for line in transcript]
                 context['transcript'] = "\n".join(formatted)
             except Exception as e:
