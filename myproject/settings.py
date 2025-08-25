@@ -87,6 +87,7 @@ DATABASES = {
     }
 }
 """
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -97,6 +98,19 @@ DATABASES = {
         'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
 }
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('MYSQL_DATABASE'),        # Database name
+        'USER': os.getenv('MYSQLUSER'),             # MySQL user, e.g. root
+        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD'), # Password
+        'HOST': os.getenv('MYSQLHOST'),             # Hostname
+        'PORT': os.getenv('MYSQLPORT', '3306'),    # Port
+    }
+}
+
 CSRF_TRUSTED_ORIGINS = [
     "https://upbeat-curiosity-production.up.railway.app",
 ]
