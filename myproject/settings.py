@@ -92,11 +92,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE', 'railway'),  # default to 'railway' if not set
-        'USER': os.getenv('MYSQLUSER', 'root'),          # default to 'root'
-        'PASSWORD': os.getenv('MYSQLPASSWORD', 'syctWPcNEGnNlVrmxPTgTcBNTtLbNhGu'),
-        'HOST': os.getenv('MYSQLHOST', 'localhost'),     # fallback if RAILWAY_PRIVATE_DOMAIN not set
-        'PORT': os.getenv('MYSQLPORT', '3306'),
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'syctWPcNEGnNlVrmxPTgTcBNTtLbNhGu',
+        'HOST': 'your_railway_private_domain_here',
+        'PORT': '3306',
     }
 }
 
